@@ -2,6 +2,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CommentServiceService } from 'src/app/core/services/comment-service.service';
+import { ExplorePage } from '../explore/explore.page';
+import { TabsPageRoutingModule } from '../tabs/tabs-routing.module';
 import { TabsPage } from '../tabs/tabs.page';
 
 @Component({
@@ -12,20 +14,28 @@ import { TabsPage } from '../tabs/tabs.page';
 export class SinglepostviewPage implements OnInit {
 
   @Input() postselected: any;
+  @Input() tab: string;
   select: string[]=[];
   comment: any;
   usercomment: string;
   constructor(private comments: CommentServiceService,private modalCtrl: ModalController) { }
 
   async back(){
-    const post = await this.modalCtrl.create({
-      component: TabsPage,
-    });
+    let post: any;
+    if(this.tab==='home'){
+      post = await this.modalCtrl.create({
+        component: TabsPage,
+      });
+    }
+    else{
+      post=await this.modalCtrl.create({
+        component: TabsPage,
+      });
+    }
     await post.present();
   }
 
   ngOnInit() {
-
     console.log(this.postselected);
     this.comments.getComments(this.postselected._id).subscribe((res: any)=>{this.comment=res.data;console.log(res);});
   }

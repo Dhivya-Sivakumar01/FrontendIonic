@@ -106,7 +106,7 @@
   <div class="container" >
     <div class="grid-container" *ngIf="user!==undefined && posts!==undefined">
         <span *ngFor="let post of posts.actualdata ; let i = index" [ngClass]="checkFormat(post.postUrl,i+1)" >
-            <div class="post-container"  *ngIf="isImage(post.postUrl) && post.postUrl" >
+            <div class="post-container"  *ngIf="post.postUrl && isImage(post.postUrl)" >
               <ion-img src={{post.postUrl}}  ></ion-img>
               <div class="blur"></div>
               <div class="info">

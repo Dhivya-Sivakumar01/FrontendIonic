@@ -35,41 +35,41 @@
     }
 }
 
-.post-container:hover{
-    .blur,.info{
-        position: absolute;
-        width:100%;
-        height:100%;
-        visibility: visible;
-    }
-    .blur{
-        background-color: black;
-        opacity:0.3;
-    }
-    .info{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
+// .post-container:hover{
+//     .blur,.info{
+//         position: absolute;
+//         width:100%;
+//         height:100%;
+//         visibility: visible;
+//     }
+//     .blur{
+//         background-color: black;
+//         opacity:0.3;
+//     }
+//     .info{
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+//         justify-content: center;
 
-        background-color: transparent;
-        color:white;
-        font-size: large;
+//         background-color: transparent;
+//         color:white;
+//         font-size: large;
 
-        .like-section,.comment-section{
-            margin:5px;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            p{
-                margin:2px;
-            }
-        }
-    }
+//         .like-section,.comment-section{
+//             margin:5px;
+//             display: flex;
+//             flex-direction: row;
+//             justify-content: center;
+//             align-items: center;
+//             color: white;
+//             p{
+//                 margin:2px;
+//             }
+//         }
+//     }
 
-}
+// }
 
 // row = index//3
 //increaseRow = 0

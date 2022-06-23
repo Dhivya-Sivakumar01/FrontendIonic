@@ -55,7 +55,7 @@ export class HomePage implements OnInit {
     console.log('parameter to child '+post);
     const postselected = await this.modalCtrl.create({
       component: SinglepostviewPage,
-      componentProps: {postselected: post},
+      componentProps: {postselected: post,tab: 'home'},
     });
     await postselected.present();
   }

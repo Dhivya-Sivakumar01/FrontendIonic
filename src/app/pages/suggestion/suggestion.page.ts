@@ -13,7 +13,7 @@ import { ApicallsService } from 'src/app/core/services/apicalls.service';
 })
 export class SuggestionPage implements OnInit {
 
-  users: any[]=[];
+  users: any;
   public search: string;
   toggle: boolean;
   suggestion:any;
@@ -25,28 +25,31 @@ export class SuggestionPage implements OnInit {
   //     profilepic: "https://presidio-hack-172022.s3.amazonaws.com/profile_pic/eight.png",
   //     description: "This is a bot user",
   // });
-  this.searchservice.getSuggestionUser('62aee4e2f6dd4af8ea2fdbbf').subscribe(res=>{this.suggestion=res.data;console.log(res);});
-  console.log(this.users);
-
+   this.fetchData();
+  }
+  fetchData(){
+    this.searchservice.getSuggestionUser('62aee4e2f6dd4af8ea2fdbbf').subscribe(res=>{this.suggestion=res.data;console.log(res);});
+   // console.log(this.users);
   }
   buttonToggle(user:any,tog:number){
     this.toggle = tog===0?false:true;
-    if(user!==null){
+    if(user!==undefined){
       if(user.followers.includes('62aee4e2f6dd4af8ea2fdbbf')){
-        this.toggle=false;
+        this.toggle=false; //unfollow active
       }
       else{
-        this.toggle=true;
+        this.toggle=true; //follow active
       }
     }
-    console.log(user.name+".."+this.toggle);
     return this.toggle;
   }
   searchUser(){
     const name=this.search;
-    console.log(name);
-    this.searchservice.findColleague(name).subscribe(res=>{this.users=res.data;});
+    if(name!==undefined && name!==''){
+      this.searchservice.findColleague(name).subscribe(res=>{this.users=res.data;});
+    }
     console.log(this.users);
+    this.fetchData();
   }
   follow(user: any){
     console.log("follow clicked...");
@@ -55,7 +58,10 @@ export class SuggestionPage implements OnInit {
       tofollow: user._id
     };
     this.searchservice.followUser(follow).subscribe(res=>{console.log(res);});
+    this.searchUser();
+    this.searchUser();
     this.buttonToggle(undefined,0);
+    this.fetchData();
   }
 
   unfollow(user: any){
@@ -66,7 +72,10 @@ export class SuggestionPage implements OnInit {
     };
     console.log(follow);
     this.searchservice.unfollowUser(follow).subscribe(res=>{console.log(res);});
-    this.buttonToggle(undefined,0);
+    this.buttonToggle(undefined,1);
+    this.searchUser();
+    this.searchUser();
+    this.fetchData();
   }
 
 }

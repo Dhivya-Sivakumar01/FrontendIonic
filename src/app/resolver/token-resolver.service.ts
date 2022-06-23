@@ -36,7 +36,7 @@ export class TokenResolverService implements Resolve<any>{
           console.log('Response: ', response);
 
           localStorage.setItem('token', response.access_token);
-
+          localStorage.setItem('test', 'Dhivya');
           if (response) {
             this.router.navigate(['tabs']);
           }
