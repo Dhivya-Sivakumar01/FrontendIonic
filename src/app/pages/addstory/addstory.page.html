@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+
+        <ion-title (click)="back()">X</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form>
+        <input type="file" (change)="imageOnClick($event)">
+    </form>
+    <img [src]="fileInput"/>
+    <input type="button" value="Share Story" (click)="submit()">
+    <!-- <input type="button" (click)="submit()" >
+      Share story
+    </input> -->
+</ion-content>
