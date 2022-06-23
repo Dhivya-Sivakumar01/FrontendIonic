@@ -32,6 +32,10 @@ const routes: Routes = [
     path: 'singlepostview',
     loadChildren: () => import('./pages/singlepostview/singlepostview.module').then( m => m.SinglepostviewPageModule)
   },
+  {
+    path: 'add-story',
+    loadChildren: () => import('./pages/add-story/add-story.module').then( m => m.AddStoryPageModule)
+  },
 
 ];
 

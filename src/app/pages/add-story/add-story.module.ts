@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddstoryPageRoutingModule } from './addstory-routing.module';
+import { AddStoryPageRoutingModule } from './add-story-routing.module';
 
-import { AddstoryPage } from './addstory.page';
+import { AddStoryPage } from './add-story.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddstoryPageRoutingModule
+    AddStoryPageRoutingModule
   ],
-  declarations: [AddstoryPage]
+  declarations: [AddStoryPage]
 })
-export class AddstoryPageModule {}
+export class AddStoryPageModule {}
