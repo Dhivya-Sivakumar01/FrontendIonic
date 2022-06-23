@@ -19,13 +19,39 @@ export class AddPostPage implements OnInit {
   isuncheked=true;
   comments='';
   selectedFiles: any;
-  pepperoni: string;
+  
   inprogress=false;
   constructor(private postservice: PostService) { }
 
   ngOnInit() {
   }
 
+
+  // @Input() userid;
+  // description:string="";
+  // fileInput:any;
+  // //
+  // submit(){
+  //   const form = new FormData();
+  //   console.log("user ID from tabb" + this.userid)
+  //   form.append('user',this.userid);
+  //   form.append("story",this.fileInput);
+  //   this.saveStroyToDb(form).subscribe(data => {
+  //    // alert("successfully added");
+  //     console.log(data);
+  //     this.back();
+  //   })
+  // }
+
+  // saveStroyToDb(form:FormData){
+  //   return this.http.post("http://localhost:5000/api/addstory",form);
+  // }
+  // async back(){
+  //   const post = await this.modalCtrl.create({
+  //     component: TabsPage,
+  //   });
+  //   await post.present();
+  // }
   showAccessbility(){
     if(this.isaccess===true){
       this.isaccess=false;

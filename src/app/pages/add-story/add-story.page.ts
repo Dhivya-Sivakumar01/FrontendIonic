@@ -1,23 +1,14 @@
-/* eslint-disable @typescript-eslint/semi */
-/* eslint-disable @typescript-eslint/type-annotation-spacing */
-/* eslint-disable @typescript-eslint/quotes */
-/* eslint-disable @typescript-eslint/no-inferrable-types */
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
-import { TabsPage } from '../tabs/tabs.page';
+import { PostService } from 'src/app/core/services/post.service';
 
 @Component({
-  selector: 'app-addstory',
-  templateUrl: './addstory.page.html',
-  styleUrls: ['./addstory.page.scss'],
+  selector: 'app-add-story',
+  templateUrl: './add-story.page.html',
+  styleUrls: ['./add-story.page.scss'],
 })
-export class AddstoryPage implements OnInit {
-  @Input() userid;
-  description:string="";
-  fileInput:any;
-  //
+export class AddStoryPage implements OnInit {
+
   format='';
   url: any='';
   isSelected=false;
@@ -27,38 +18,39 @@ export class AddstoryPage implements OnInit {
   isuncheked=true;
   comments='';
   selectedFiles: any;
-  pepperoni: string;
+  
   inprogress=false;
-  constructor(private http:HttpClient,private modalCtrl : ModalController) { }
+  constructor(private postservice: PostService) { }
 
   ngOnInit() {
   }
-  imageOnClick(event:any){
-    this.fileInput = event.target.files[0]
-    console.log(this.fileInput)
-  }
 
-  submit(){
-    const form = new FormData();
-    console.log("user ID from tabb" + this.userid)
-    form.append('user',this.userid);
-    form.append("story",this.fileInput);
-    this.saveStroyToDb(form).subscribe(data => {
-     // alert("successfully added");
-      console.log(data);
-      this.back();
-    })
-  }
 
-  saveStroyToDb(form:FormData){
-    return this.http.post("http://localhost:5000/api/addstory",form);
-  }
-  async back(){
-    const post = await this.modalCtrl.create({
-      component: TabsPage,
-    });
-    await post.present();
-  }
+  @Input() userid;
+  description:string="";
+  fileInput:any;
+ 
+  // submit(){
+  //   const form = new FormData();
+  //   console.log("user ID from tabb" + this.userid)
+  //   form.append('user',this.userid);
+  //   form.append("story",this.fileInput);
+  //   this.saveStroyToDb(form).subscribe(data => {
+  //    // alert("successfully added");
+  //     console.log(data);
+  //     this.back();
+  //   })
+  // }
+
+  // saveStroyToDb(form:FormData){
+  //   return this.http.post("http://localhost:5000/api/addstory",form);
+  // }
+  // async back(){
+  //   const post = await this.modalCtrl.create({
+  //     component: TabsPage,
+  //   });
+  //   await post.present();
+  // }
   showAccessbility(){
     if(this.isaccess===true){
       this.isaccess=false;
@@ -67,6 +59,7 @@ export class AddstoryPage implements OnInit {
     }
   }
   onChange(event: any) {
+
     this.selectFile(event);
       const file = event.target.files && event.target.files[0];
       if (file) {
@@ -123,5 +116,22 @@ export class AddstoryPage implements OnInit {
       formData.append('user','62aeeed26b0657ec29e03f84');
 
       // eslint-disable-next-line @typescript-eslint/no-shadow
+      this.postservice.uploadPost(formData).subscribe(data=>{
+        console.log(data);
+        if(data){
+          this.url='';
+          this.selectedFiles='';
+          this.comments='';
+          this.accessbility='public';
+          this.isSelected=false;
+          this.inprogress=false;
+          const b = document.getElementById('accessbility');
+          b.setAttribute('aria-checked','false');
+          b.classList.remove('toggle-checked');
+          b.classList.add('toggle-unchecked');
+
+        }
+      });
    }
+
 }

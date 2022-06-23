@@ -13,7 +13,7 @@ import { Comments } from 'src/app/core/interfaces/comments';
 import { CommentServiceService } from 'src/app/core/services/comment-service.service';
 import { PostlistService } from 'src/app/core/services/postlist.service';
 import { Post } from '../../core/interfaces/post';
-import { AddstoryPage } from '../addstory/addstory.page';
+import { AddStoryPage } from '../add-story/add-story.page'
 import { PostviewPage } from '../postview/postview.page';
 import { SinglepostviewPage } from '../singlepostview/singlepostview.page';
 import { SinglestoryPage } from '../singlestory/singlestory.page';
@@ -200,7 +200,7 @@ export class HomePage implements OnInit {
   }
   async addStory(){
     const addstory = await this.modalCtrl.create({
-      component:AddstoryPage,
+      component:AddStoryPage,
       componentProps:{userid:"62aee4e2f6dd4af8ea2fdbbf"}
     })
     await addstory.present();
