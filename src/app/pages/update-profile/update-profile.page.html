@@ -17,7 +17,7 @@
   <div class="header">
     <div class="avatar" (click)="showChooseProfile()">
   
-        <img src="https://thumbs.dreamstime.com/b/male-avatar-icon-flat-style-male-user-icon-cartoon-man-avatar-hipster-vector-stock-91462914.jpg" alt="">
+        <img src="{{url}}" alt="">
         
     </div>
   </div>
@@ -31,7 +31,7 @@
       <div class="chooseProfile-conatiner">
 
           <div class="chooseProfile-header">
-              <img *ngIf="isSelected==false" src="https://thumbs.dreamstime.com/b/male-avatar-icon-flat-style-male-user-icon-cartoon-man-avatar-hipster-vector-stock-91462914.jpg" class="chooseProfile-photo">
+              <img *ngIf="isSelected==false" src="{{url}}" class="chooseProfile-photo">
               <img  *ngIf="isSelected==true" src="{{url}}" class="chooseProfile-photo">
               <p class="head">Synced Profile Photo</p>
           </div>
@@ -64,7 +64,7 @@
   </ion-item>
   <ion-item>
     <ion-label position="fixed" >Description</ion-label>
-    <ion-textarea name="dec" [(ngModel)]="description"></ion-textarea>
+    <ion-textarea name="description" [(ngModel)]="description"></ion-textarea>
   </ion-item>
 
 </form>

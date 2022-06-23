@@ -11,6 +11,10 @@ export class ApicallsService {
     const data='62aeeed26b0657ec29e03f84';
     return this.http.get(`${this.baseURL}profile/${data}`);
   }
+  getUserById(id:any):any{
+    return this.http.get(`${this.baseURL}profile/${id}`);
+
+  }
   getPost(): any{
     const data ='62aeeed26b0657ec29e03f84';
     return this.http.get(`${this.baseURL}selfposts/${data}`);
@@ -26,5 +30,11 @@ export class ApicallsService {
   }
   getSuggestionUser(id: any): any{
     return this.http.get(`${this.baseURL}myfollowers/${id}`);
+  }
+  updateProfilePic(data:any):any{
+      return this.http.post(`${this.baseURL}add-profile-pic/`,data);
+  }
+  updateProfileDetails(data:any):any{
+  return this.http.put(`${this.baseURL}updateprofile/`,data);
   }
 }

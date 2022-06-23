@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { ApicallsService } from 'src/app/core/services/apicalls.service';
 import {ProfilePage} from '../profile/profile.page'
 import { TabsPage } from '../tabs/tabs.page';
 @Component({
@@ -12,7 +13,7 @@ export class UpdateProfilePage implements OnInit {
   @Input() userid;
   format:string='';
 
-  selectedFiles?: FileList;
+  selectedFiles?: any;
 
   hidechooseProfile:boolean=true;
   
@@ -22,9 +23,20 @@ export class UpdateProfilePage implements OnInit {
   isSelected: boolean=false;
   url: string | ArrayBuffer;
   inprogress:boolean=false;
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController,private apiservice:ApicallsService) { 
+    
+  }
 
   ngOnInit() {
+    this.apiservice.getUserById(this.userid).subscribe((res:any)=>{
+      console.log(this.userid);
+      // console.log(data.data.name);
+      
+      this.username=res.data.name;
+      this.url=res.data.profilepic;
+      this.description=res.data.description
+      
+    })
   }
 
 
@@ -33,7 +45,6 @@ export class UpdateProfilePage implements OnInit {
   }
   closechooseProfile(){
     this.hidechooseProfile=true;
-    this.url='';
     this.isSelected=false;
   }
 
@@ -44,9 +55,27 @@ export class UpdateProfilePage implements OnInit {
     await post.present();
   }
 
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files[0];
+  }
+
   saveProfilePost(){
-    console.log(this.url);
+
+  
+    const formData = new FormData();
+    formData.append('id',this.userid);
+    formData.append('profilepic',this.selectedFiles);
+    
     this.inprogress=true;
+
+    this.apiservice.updateProfilePic(formData).subscribe((data:any)=>{
+      this.inprogress=false;
+      this.closechooseProfile();
+    })
+
+    
+    
+    // console.log(this.userid);
     
   }
   saveProfileData(){
@@ -54,11 +83,20 @@ export class UpdateProfilePage implements OnInit {
     console.log(this.description);
     this.inprogress=true;
 
+    const formData = new FormData();
+    formData.append('_id',this.userid);
+    formData.append('name',this.username);
+    formData.append('description',this.description);
     
+    this.apiservice.updateProfileDetails(formData).subscribe((data:any)=>{
+      this.inprogress=true;
+      console.log(data);
+      
+    })
   }
 
   onChange(event: any) {
-
+    this.selectFile(event);
       const file = event.target.files && event.target.files[0];
       if (file) {
         const reader = new FileReader();

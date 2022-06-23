@@ -164,7 +164,7 @@ export class ProfilePage implements OnInit {
   async editProfile(){
     const addstory = await this.modalCtrl.create({
       component:UpdateProfilePage ,
-      componentProps:{userid:"62aee4e2f6dd4af8ea2fdbbf"}
+      componentProps:{userid:"62aeeed26b0657ec29e03f84"}
     })
     await addstory.present();
 }
