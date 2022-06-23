@@ -1,4 +1,5 @@
 
+  
   .addpost-content{
     display: flex;
     justify-content: center;
@@ -12,12 +13,13 @@
     height: 200px;
   }
   .upload-content{
-    border: 4px dashed #007bac;
+    border: 4px dashed #a353ff;
+
     width: 100%;
     height: 100%;
     text-align: center;
     line-height: 170px;
-    color: #007bac;
+    color: #a353ff;
     font-size: 20px;
     margin-bottom: 30px;
   }
@@ -34,18 +36,21 @@
     margin: 10px;
     color: #fff;
     background: #007bac;
+    // background: linear-gradient(to right,#fc337d,#fc33af,#dc4fc0,#a353ff,#7b4eb6,#5e21ae);
+    background:linear-gradient(to right,#3880ff,#4c8dff,#7250fb);
+
     border: none;
     width: 370px;
     height: 50px;
     font-size: 23px;
     margin-left: -4px;
     border-radius: 3px;
-    border-bottom: 4px solid #007bac;
+    border-bottom: 1px solid #3880ff;
     transition: all .2s ease;
     outline: none;
   }
   form button:hover{
-    background: #007bac;
+    background:#a353ff;
     color: #fff;
   }
   form button:active{
@@ -56,7 +61,7 @@
     font-size: 35px;
     margin-left: 320px;
     margin-bottom: -65px;
-    color: #0075ad;
+    color: #a353ff;
     cursor: pointer;
     top: 6px;
     cursor: pointer;

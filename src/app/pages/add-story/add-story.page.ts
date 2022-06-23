@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from 'src/app/core/services/post.service';
+import { ModalController } from '@ionic/angular';
+import { CommentServiceService } from 'src/app/core/services/comment-service.service';
+import { TabsPage } from '../tabs/tabs.page';
 
 @Component({
   selector: 'app-add-story',
@@ -20,7 +23,7 @@ export class AddStoryPage implements OnInit {
   selectedFiles: any;
   
   inprogress=false;
-  constructor(private postservice: PostService) { }
+  constructor(private postservice: PostService,private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
@@ -80,8 +83,15 @@ export class AddStoryPage implements OnInit {
         this.isSelected=false;
       }
     }
+    async back(){
+      const post = await this.modalCtrl.create({
+        component: TabsPage,
+      });
+      await post.present();
+    }
+  
 
-
+    
     selectFile(event: any): void {
       this.selectedFiles = event.target.files[0];
     }

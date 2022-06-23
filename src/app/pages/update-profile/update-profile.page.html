@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button slot="start" routerLink="" class="homebutton">
-      <ion-icon name="images"></ion-icon>
+    <ion-button routerLink="tabs" slot="start" (click)="back()" class="homebutton"><!--expand="block" [routerLink]="['/tabs','/tabs/home','/home']" routerDirection="forward"-->
+      <ion-icon expand="full" name="arrow-back"></ion-icon>
     </ion-button>
     <ion-title>Edit Profile</ion-title>
     <ion-button slot="end" (click)="saveProfileData()">

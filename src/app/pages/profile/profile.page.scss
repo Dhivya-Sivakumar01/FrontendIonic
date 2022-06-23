@@ -24,6 +24,8 @@ ion-content {
                   border-radius: 20px;
                   padding: 3px;
                   background: linear-gradient(to bottom,#3db7e7,#20a1d4,#007bac,#a353ff,#7b4eb6,#5e21ae);
+                //   background: linear-gradient(to bottom,#20ab81,#3dbc5c);
+
                   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
                   -webkit-mask-composite: destination-out;
                   mask-composite: exclude;
@@ -35,6 +37,8 @@ ion-content {
                   ion-fab-button {
                       width: 20px;
                       height: 20px;
+                    //   --background: linear-gradient(to bottom,#20ab81,#3dbc5c);
+
                       --background: linear-gradient(to bottom,#3db7e7,#20a1d4,#007bac,#a353ff,#7b4eb6,#5e21ae);
                   }
               }

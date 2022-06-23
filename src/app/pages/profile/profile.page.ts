@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AnimationController } from '@ionic/angular';
+import { AnimationController, ModalController } from '@ionic/angular';
 import { User } from 'src/app/core/interfaces/user';
 import { ApicallsService } from 'src/app/core/services/apicalls.service';
+import { UpdateProfilePage } from '../update-profile/update-profile.page'
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,7 @@ export class ProfilePage implements OnInit {
   user: any ={};
   images: any[]=[];
 
-  constructor(private profileapi: ApicallsService,private animationCtrl: AnimationController) {
+  constructor(private profileapi: ApicallsService,private animationCtrl: AnimationController,private modalCtrl: ModalController) {
     this.stories = [
       { name: 'New' },
       { name: 'Android', src: 'assets/imgs/circles/android.png' },
@@ -39,6 +40,7 @@ export class ProfilePage implements OnInit {
       {value: 'photos', icon: 'images'},
     ];
    }
+
 
   ngOnInit() {
     this.profileapi.getUserDetails().subscribe(data=>{this.user=data.data;console.log(data.data);});
@@ -159,4 +161,11 @@ export class ProfilePage implements OnInit {
 
   leaveAnimation = (baseEl: HTMLElement) => this.enterAnimation(baseEl).direction('reverse');
 
+  async editProfile(){
+    const addstory = await this.modalCtrl.create({
+      component:UpdateProfilePage ,
+      componentProps:{userid:"62aee4e2f6dd4af8ea2fdbbf"}
+    })
+    await addstory.present();
+}
 }

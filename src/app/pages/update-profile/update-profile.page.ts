@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import {ProfilePage} from '../profile/profile.page'
+import { TabsPage } from '../tabs/tabs.page';
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.page.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateProfilePage implements OnInit {
 
-
+  @Input() userid;
   format:string='';
 
   selectedFiles?: FileList;
@@ -20,7 +22,7 @@ export class UpdateProfilePage implements OnInit {
   isSelected: boolean=false;
   url: string | ArrayBuffer;
   inprogress:boolean=false;
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
   }
@@ -33,6 +35,13 @@ export class UpdateProfilePage implements OnInit {
     this.hidechooseProfile=true;
     this.url='';
     this.isSelected=false;
+  }
+
+  async back(){
+    const post = await this.modalCtrl.create({
+      component: TabsPage,
+    });
+    await post.present();
   }
 
   saveProfilePost(){
