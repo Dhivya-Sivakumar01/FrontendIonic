@@ -5,7 +5,8 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, Input, OnInit } from '@angular/core';
 import {ModalController} from '@ionic/angular'
-import { StoryPage } from '../story/story.page';
+import { TabsPage } from '../tabs/tabs.page';
+
 @Component({
   selector: 'app-singlestory',
   templateUrl: './singlestory.page.html',
@@ -22,7 +23,7 @@ export class SinglestoryPage implements OnInit {
   }
   async back(){
     const post = await this.modalCtrl.create({
-      component: StoryPage,
+      component: TabsPage,
     });
     await post.present();
   }

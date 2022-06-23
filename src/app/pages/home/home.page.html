@@ -12,25 +12,23 @@
 
 <ion-content>
    <!--Story -->
-   <!-- <ion-row>
+   <ion-row>
     <ion-slides [options]="slideOpts">
       <ion-col>
-      <ion-thumbnail>
-        <ion-img  src="assets/imgs/addIcon.png" (click)="addStory()"></ion-img>
+      <ion-thumbnail >
+        <ion-img  src="assets/imgs/addIcon.png" class="addImage" (click)="addStory()"></ion-img>
       </ion-thumbnail>
     </ion-col>
       <ion-slide *ngFor="let item of storiesValue; let i = index">
-
         <ion-col>
-          <!-- {{item.storyUrl}}
+          <!-- {{item.storyUrl}}-->
           <ion-fab>
             <ion-fab-button slot="fixed">
               <ion-icon name="add"></ion-icon>
             </ion-fab-button>
           </ion-fab>
-
           <ion-thumbnail>
-            <!-- <ion-icon *ngIf="i === 0" name="add" color="dark" style="border-color: black;border-radius: 50px;"></ion-icon>
+            <!--  <ion-icon *ngIf="i === 0" name="add" color="dark" style="border-color: black;border-radius: 50px;"></ion-icon> -->
             <img  [src]="item.storyUrl" (click)="viewStory(item.storyUrl)"/>
           </ion-thumbnail>
           <p>
@@ -39,7 +37,7 @@
         </ion-col>
       </ion-slide>
     </ion-slides>
-   </ion-row> -->
+   </ion-row>
      <ion-card *ngFor="let post of postlist">
       <ion-card-header>
         <ion-card-content >

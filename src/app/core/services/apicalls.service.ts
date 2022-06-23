@@ -16,7 +16,7 @@ export class ApicallsService {
     return this.http.get(`${this.baseURL}selfposts/${data}`);
   }
   findColleague(name: string): any{
-    return this.http.get(`${this.baseURL}/get/user/${name}`);
+    return this.http.get(`${this.baseURL}get/user/${name}`);
   }
   followUser(user: any): any{
     return this.http.post(`${this.baseURL}follow/user`,user);

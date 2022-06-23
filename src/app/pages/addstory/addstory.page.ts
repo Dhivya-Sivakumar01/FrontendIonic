@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { StoryPage } from '../story/story.page';
+import { TabsPage } from '../tabs/tabs.page';
 
 @Component({
   selector: 'app-addstory',
@@ -17,6 +17,18 @@ export class AddstoryPage implements OnInit {
   @Input() userid;
   description:string="";
   fileInput:any;
+  //
+  format='';
+  url: any='';
+  isSelected=false;
+  isaccess=false;
+  noImagePost=false;
+  accessbility='public';
+  isuncheked=true;
+  comments='';
+  selectedFiles: any;
+  pepperoni: string;
+  inprogress=false;
   constructor(private http:HttpClient,private modalCtrl : ModalController) { }
 
   ngOnInit() {
@@ -32,7 +44,7 @@ export class AddstoryPage implements OnInit {
     form.append('user',this.userid);
     form.append("story",this.fileInput);
     this.saveStroyToDb(form).subscribe(data => {
-      alert("successfully added");
+     // alert("successfully added");
       console.log(data);
       this.back();
     })
@@ -43,9 +55,73 @@ export class AddstoryPage implements OnInit {
   }
   async back(){
     const post = await this.modalCtrl.create({
-      component: StoryPage,
+      component: TabsPage,
     });
     await post.present();
   }
+  showAccessbility(){
+    if(this.isaccess===true){
+      this.isaccess=false;
+    }else{
+      this.isaccess=true;
+    }
+  }
+  onChange(event: any) {
+    this.selectFile(event);
+      const file = event.target.files && event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        if(file.type.indexOf('image')> -1){
+          this.format = 'image';
+        } else if(file.type.indexOf('video')> -1){
+          this.format = 'video';
+        }
+        // eslint-disable-next-line @typescript-eslint/no-shadow
+        reader.onload = (event) => {
+          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          this.url = (<FileReader>event.target).result;
+          this.isSelected=true;
+        };
+      }else{
+        this.isSelected=false;
+      }
+    }
 
+
+    selectFile(event: any): void {
+      this.selectedFiles = event.target.files[0];
+    }
+
+    selectedStatus(){
+      if(this.isSelected){
+        this.isSelected=false;
+        this.url='';
+        this.format='';
+      }
+    }
+
+    changeAccessbility(){
+        if(this.accessbility==='public'){
+          this.accessbility='private';
+        }else{
+          this.accessbility='public';
+        }
+    }
+
+
+    onClickSubmit(data: NgForm) {
+      this.inprogress=true;
+      this.noImagePost=true;
+
+      console.log(this.accessbility);
+
+      const formData = new FormData();
+      formData.append('description',this.comments);
+      formData.append('accessibility',this.accessbility);
+      formData.append('post',this.selectedFiles);
+      formData.append('user','62aeeed26b0657ec29e03f84');
+
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+   }
 }

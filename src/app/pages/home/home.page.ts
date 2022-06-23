@@ -74,7 +74,14 @@ export class HomePage implements OnInit {
   this.slideOpts = {
     slidesPerView: this.checkScreen(),
     slideShadows: true,
-    speed:1000
+    speed:1000,
+    coverflowEffect: {
+      rotate: 50,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true,
+    },
   };
   this.buttonItems = [
     {value: 'grid', icon: 'grid'},

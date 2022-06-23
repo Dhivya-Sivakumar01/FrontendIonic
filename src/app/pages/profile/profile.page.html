@@ -142,34 +142,23 @@
     </div>
 
     </div>
-    <ion-modal #modal trigger="open-modal" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation" style="height:200px;width:200px;margin:0px auto;">
-      <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-buttons slot="end">
-              <ion-button (click)="modal.dismiss()">Close</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
+
+    <ion-modal #modal trigger="open-modal" [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation" style="height:170px;width:200px;margin:16% auto;border-radius: 5px;margin-left:45%;border:1px solid silver">
+      <ng-template class="popup">
+        <ion-item>
+          <ion-button slot="end" class="closebutton" (click)="modal.dismiss()" style="--background:white;width:20%;border:none;box-shadow:none">
+            <ion-icon  name="close" style="margin:0;padding:0;color:black"></ion-icon>
+          </ion-button>
+        </ion-item>
         <ion-content>
           <ion-list>
             <ion-item>
-              <ion-avatar slot="start">
-                <ion-img src="https://i.pravatar.cc/300?u=a"></ion-img>
-              </ion-avatar>
-              <ion-label>
-                <h2>Daniel Smith</h2>
-                <p>Product Designer</p>
-              </ion-label>
+              <ion-label>Edit Profile</ion-label>
+              <ion-icon slot="end" name="open"></ion-icon>
             </ion-item>
-            <ion-item>
-              <ion-avatar slot="start">
-                <ion-img src="https://i.pravatar.cc/300?u=d"></ion-img>
-              </ion-avatar>
-              <ion-label>
-                <h2>Greg Smith</h2>
-                <p>Director of Operations</p>
-              </ion-label>
+            <ion-item routerLink="" (click)="modal.dismiss()">
+              <ion-label>Logout</ion-label>
+              <ion-icon slot="end" name="power"></ion-icon>
             </ion-item>
           </ion-list>
         </ion-content>

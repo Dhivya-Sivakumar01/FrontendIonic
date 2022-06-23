@@ -185,48 +185,33 @@ ion-content {
 
 }
 
-// row = index//3
-//increaseRow = 0
-// pos = 1
-
-//grid-row-start = row + pos + (increaseRow)
-//grid-row-end = row + pos + (increaseRow) + 2
-
-//grid-row = grid-row-start/grid-row-end;
-
-// increaseRow++
-
 .post-container{
   grid-column:1/3;
-  //1//3 + 1 + 0 = 0+1+0 = 1 , 0+1+0+2 = 3
-  //increaseRow = 1
 }
-
-.four{
-  grid-row:3/5;
-  grid-column:2/4;
-  //4//3 + 1 + 1 = 1+1+1 = 3 , 1+1+1+2 = 5
-  //increaseRow = 2
-}
-
 .video-container{
   grid-row : span 2;
   grid-column : span 2;
 }
-
-// .grid{
-//   display: grid;
-//   grid-template-columns: 32% 32% 32%;
-//   grid-template-rows: 32% 32% 32%;
-// }
 .grid {
   display: grid;
   grid-template-columns: auto auto auto;
 }
-
 .grid-item {
   border: 1px solid rgba(0, 0, 0, 0.8);
   text-align: center;
+}
+ng-template{
+  .closebutton{
+    display: block;
+    margin:0 auto;
+    padding:0;
+    --background: transparent;
+  }
+  ion-icon{
+    padding:0;
+    margin:0;
+    color:#20a1d4
+  }
 }
 
 @media only screen and (max-width: 700px) {

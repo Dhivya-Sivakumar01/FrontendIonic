@@ -1,14 +1,21 @@
-
-  <ion-header id="cont">
+ <ion-header>
     <ion-toolbar>
-      <ion-title (click)="getBack()">X</ion-title>
+      <ion-button slot="start"  (click)="getBack()" class="notification">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+      <ion-button slot="end" routerLink="" class="homebutton">
+        <ion-icon name="images"></ion-icon>
+      </ion-button>
+      <ion-title slote="end">View Story</ion-title>
     </ion-toolbar>
   </ion-header>
-  
-  <ion-content class="container">
-    <!-- {{postselected}} -->
-   <img [src]="postselected"/>
+
+  <ion-content>
+    <div class="container">
+      <!-- {{postselected}} -->
+     <img [src]="postselected"/>
+     </div>
   </ion-content>
-  
+
 
 
