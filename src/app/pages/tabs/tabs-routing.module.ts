@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '../guard/auth.guard';
 
 import { TabsPage } from './tabs.page';
 
@@ -10,6 +11,7 @@ const routes: Routes = [
     children: [
       {
           path:'home',
+          canActivate:[AuthGuard],
           loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
       },
       {
@@ -18,30 +20,34 @@ const routes: Routes = [
       },
       {
         path:'add',
+        canActivate:[AuthGuard],
         loadChildren:() => import('../add-post/add-post.module').then(m => m.AddPostPageModule)
       },
       {
         path:'suggestion',
+        canActivate:[AuthGuard],
         loadChildren:() => import('../suggestion/suggestion.module').then(m => m.SuggestionPageModule)
       },
       {
         path:'profile',
+        canActivate:[AuthGuard],
         loadChildren:() => import('../profile/profile.module').then(m => m.ProfilePageModule)
       },
       {
         path:'edit-profile',
+        canActivate:[AuthGuard],
         loadChildren:() => import('../update-profile/update-profile.module').then(m => m.UpdateProfilePageModule)
       },
       {
         path:'',
-        redirectTo:'/tabs/home',
+        redirectTo:'/tabs/explore',
         pathMatch:'full'
       }
     ]
   },
   {
     path:'',
-    redirectTo:'/tabs/home',
+    redirectTo:'/tabs/explore',
     pathMatch:'full'
   }
 ];

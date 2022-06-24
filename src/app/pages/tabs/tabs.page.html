@@ -7,10 +7,10 @@
   </ion-fab>
 
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
+    <ion-tab-button routerLink="/tabs/home">
       <ion-icon name="home"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button tab="explore" class="search">
+    <ion-tab-button class="search" routerLink="/tabs/explore"><!--routerLink="/tabs/search"-->
       <ion-icon name="search"></ion-icon>
     </ion-tab-button>
 
@@ -20,10 +20,10 @@
       </path>
     </svg>
 
-    <ion-tab-button tab="suggestion" class="wishlist">
+    <ion-tab-button class="wishlist" routerLink="/tabs/suggestion">
       <ion-icon name="heart"></ion-icon>
     </ion-tab-button>
-    <ion-tab-button tab="profile">
+    <ion-tab-button routerLink="/tabs/profile">
       <ion-icon name="person"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>
