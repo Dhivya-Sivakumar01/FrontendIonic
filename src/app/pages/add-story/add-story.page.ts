@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable @typescript-eslint/type-annotation-spacing */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostService } from 'src/app/core/services/post.service';
@@ -18,7 +22,6 @@ export class AddStoryPage implements OnInit {
   isuncheked=true;
   comments='';
   selectedFiles: any;
-  
   inprogress=false;
   constructor(private postservice: PostService) { }
 
@@ -29,7 +32,7 @@ export class AddStoryPage implements OnInit {
   @Input() userid;
   description:string="";
   fileInput:any;
- 
+
   // submit(){
   //   const form = new FormData();
   //   console.log("user ID from tabb" + this.userid)

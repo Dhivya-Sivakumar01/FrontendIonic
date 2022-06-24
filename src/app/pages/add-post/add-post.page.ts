@@ -19,7 +19,6 @@ export class AddPostPage implements OnInit {
   isuncheked=true;
   comments='';
   selectedFiles: any;
-  
   inprogress=false;
   constructor(private postservice: PostService) { }
 

@@ -40,9 +40,17 @@ ion-card-content{
   ion-item{
     display:block;
     margin:0 auto;
+    object-fit: contain;
     border:none;
+    min-height: 10px;
+    overflow: hidden;
     box-shadow: none;
     --background:transparent;
+    ion-content{
+
+      min-height: 10px;
+    overflow: hidden;
+    }
   }
   ion-icon{
     color:#31a9d9;//#c0bec2;
