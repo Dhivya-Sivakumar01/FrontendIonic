@@ -90,6 +90,7 @@ export class HomePage implements OnInit {
   ];
   this.getStories("62aeeed26b0657ec29e03f84").subscribe((data:any)=>{
     this.storiesValue = data.data;
+    this.storiesValue.reverse();
     console.log(typeof data);
     console.log(this.storiesValue);
   })

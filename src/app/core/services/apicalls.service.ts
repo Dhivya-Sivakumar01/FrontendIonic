@@ -39,5 +39,6 @@ export class ApicallsService {
   }
   addStory(data:any):any{
    return this.http.post(`${this.baseURL}addstory/`,data);
+
   }
 }

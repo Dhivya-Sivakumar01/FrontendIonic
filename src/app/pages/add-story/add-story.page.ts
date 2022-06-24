@@ -120,16 +120,16 @@ export class AddStoryPage implements OnInit {
     onClickSubmit(data: NgForm) {
 
       this.noImagePost=true;
-        var user:any;
-      this.api.getUserById(this.userid).subscribe((res:any)=>{
-        user=res.data;
-        console.log(user);
-      })
+      //   var user:any;
+      // this.api.getUserById(this.userid).subscribe((res:any)=>{
+      //   user=res.data;
+      //   console.log(user);
+      // })
       console.log(this.selectedFiles);
       
       const form = new FormData();
-      form.append('user',user);
-      form.append('storyUrl',this.selectedFiles);
+      form.append('user',this.userid);
+      form.append('story',this.selectedFiles);
     
         this.inprogress=true;
 
@@ -143,4 +143,5 @@ export class AddStoryPage implements OnInit {
 
    }
 
-}
+
+  }

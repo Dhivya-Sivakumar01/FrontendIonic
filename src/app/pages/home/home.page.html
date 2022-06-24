@@ -15,14 +15,14 @@
    <ion-row>
     <ion-slides [options]="slideOpts">
       <ion-col>
-      <ion-thumbnail >
-        <ion-img  src="assets/imgs/addIcon.png" class="addImage" (click)="addStory()" class="addnewstory"></ion-img>
+      <ion-thumbnail  style="border-radius: 100%;border: 1px solid #cccccc;">
+        <ion-img  src="assets/imgs/addIcon.png" width="100" height="100" class="addImage" (click)="addStory()" class="addnewstory"></ion-img>
       </ion-thumbnail>
     </ion-col>
       <ion-slide *ngFor="let item of storiesValue; let i = index">
         <ion-col>
           <!-- {{item.storyUrl}}-->
-          <ion-fab>
+          <ion-fab >
             <ion-fab-button slot="fixed">
               <ion-icon name="add"></ion-icon>
             </ion-fab-button>
