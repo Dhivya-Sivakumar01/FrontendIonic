@@ -1,3 +1,12 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable quote-props */
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/semi */
+/* eslint-disable @typescript-eslint/type-annotation-spacing */
+/* eslint-disable @typescript-eslint/quotes */
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ApicallsService } from 'src/app/core/services/apicalls.service';
@@ -16,7 +25,7 @@ export class UpdateProfilePage implements OnInit {
   selectedFiles?: any;
 
   hidechooseProfile:boolean=true;
-  
+
   username:string='';
   description:string='';
 
@@ -24,20 +33,20 @@ export class UpdateProfilePage implements OnInit {
   url: string | ArrayBuffer;
   previous_url:any;
   inprogress:boolean=false;
-  constructor(private modalCtrl: ModalController,private apiservice:ApicallsService) { 
-    
+  constructor(private modalCtrl: ModalController,private apiservice:ApicallsService) {
+
   }
 
   ngOnInit() {
     this.apiservice.getUserById(this.userid).subscribe((res:any)=>{
       console.log(this.userid);
       // console.log(data.data.name);
-      
+
       this.username=res.data.name;
       this.url=res.data.profilepic;
       this.previous_url=this.url;
       this.description=res.data.description
-      
+
     })
   }
 
@@ -64,11 +73,11 @@ export class UpdateProfilePage implements OnInit {
 
   saveProfilePost(){
 
-  
+
     const formData = new FormData();
     formData.append('id',this.userid);
     formData.append('profilepic',this.selectedFiles);
-    
+
     this.inprogress=true;
 
     this.apiservice.updateProfilePic(formData).subscribe((data:any)=>{
@@ -77,10 +86,10 @@ export class UpdateProfilePage implements OnInit {
     this.isSelected=false;
     })
 
-    
-    
+
+
     // console.log(this.userid);
-    
+
   }
   saveProfileData(){
     console.log(this.username);
@@ -92,7 +101,7 @@ export class UpdateProfilePage implements OnInit {
       "description":this.description,
       "_id":this.userid
   }
- 
+
     this.apiservice.updateProfileDetails(data).subscribe((data:any)=>{
       this.inprogress=false;
       console.log(data);

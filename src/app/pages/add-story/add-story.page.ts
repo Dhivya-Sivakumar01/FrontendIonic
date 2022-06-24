@@ -1,3 +1,5 @@
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable no-var */
 /* eslint-disable @typescript-eslint/quotes */
 /* eslint-disable @typescript-eslint/type-annotation-spacing */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
@@ -93,9 +95,6 @@ export class AddStoryPage implements OnInit {
       });
       await post.present();
     }
-  
-
-    
     selectFile(event: any): void {
       this.selectedFiles = event.target.files[0];
     }
@@ -124,13 +123,13 @@ export class AddStoryPage implements OnInit {
       this.api.getUserById(this.userid).subscribe((res:any)=>{
         user=res.data;
         console.log(user);
-      })
+      });
       console.log(this.selectedFiles);
-      
+
       const form = new FormData();
       form.append('user',user);
       form.append('storyUrl',this.selectedFiles);
-    
+
         this.inprogress=true;
 
         this.api.addStory(form).subscribe((res:any)=>{
@@ -139,7 +138,7 @@ export class AddStoryPage implements OnInit {
           this.url='';
           this.isSelected=false;
           this.inprogress=false;
-        })
+        });
 
    }
 

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AutoLoginGuard } from './pages/guard/auto-login.guard';
 import { TokenResolverService } from './resolver/token-resolver.service';
 import { AuthGuard } from './services/auth.guard';
 
@@ -27,8 +28,10 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate:[AutoLoginGuard],
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'singlepostview',
     loadChildren: () => import('./pages/singlepostview/singlepostview.module').then( m => m.SinglepostviewPageModule)
   },
