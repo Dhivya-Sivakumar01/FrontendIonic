@@ -10,13 +10,14 @@ import { AuthGuard } from './services/auth.guard';
 import { AuthenticationService } from './services/authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TabsPageModule } from './pages/tabs/tabs.module';
+import { UpdateProfilePageModule } from './pages/update-profile/update-profile.module';
 // import { CommonModule } from '@angular/common';
 
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,TabsPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,TabsPageModule,UpdateProfilePageModule],
   providers: [AuthGuard, AuthenticationService,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

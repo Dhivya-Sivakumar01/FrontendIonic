@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button slot="start" routerLink="" class="homebutton">
-      <ion-icon name="images"></ion-icon>
+    <ion-button routerLink="tabs" slot="start" (click)="back()" class="homebutton"><!--expand="block" [routerLink]="['/tabs','/tabs/home','/home']" routerDirection="forward"-->
+      <ion-icon expand="full" name="arrow-back"></ion-icon>
     </ion-button>
     <ion-title>Add story</ion-title>
     <ion-button slot="end" routerLink="" class="notification">
@@ -10,16 +10,16 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-progress-bar type="indeterminate" *ngIf="inprogress"></ion-progress-bar>
 <ion-content>
 
   <div class="profile-header">
-      <h2>Add Post</h2>
+      <h2>Add Story</h2>
   </div>
 
   <div class="addpost-content">
     <form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(userlogin)" >
 
-  <ion-progress-bar type="indeterminate" *ngIf="inprogress"></ion-progress-bar>
 
 
       <!-- <div *ngIf="noImagePost===false"> -->
@@ -32,22 +32,6 @@
           <ion-img  class="selecteimage"  [src]="url" *ngIf="format==='image' && url" ></ion-img>
           <video class="selectedvideo" [src]="url" *ngIf="format==='video' && url" controls></video>
         </div>
-
-        <ion-item>
-          <ion-textarea name="comments" [(ngModel)]="comments">What's in your mind?</ion-textarea>
-        </ion-item>
-
-        <ion-list>
-
-          <ion-item>
-            <ion-label>Accessbility</ion-label>
-              <ion-item>
-                <ion-label>Private</ion-label>
-                <ion-toggle (click)="changeAccessbility()" id="accessbility" ></ion-toggle>
-              </ion-item>
-          </ion-item>
-
-        </ion-list>
 
         <button  type="submit">Share</button>
   </form>

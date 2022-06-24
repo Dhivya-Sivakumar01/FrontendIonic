@@ -58,6 +58,7 @@ export class AddPostPage implements OnInit {
       this.isaccess=true;
     }
   }
+  
   onChange(event: any) {
 
     this.selectFile(event);

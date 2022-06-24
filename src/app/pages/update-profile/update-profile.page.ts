@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ApicallsService } from 'src/app/core/services/apicalls.service';
+import {ProfilePage} from '../profile/profile.page'
+import { TabsPage } from '../tabs/tabs.page';
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.page.html',
@@ -7,10 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateProfilePage implements OnInit {
 
-
+  @Input() userid;
   format:string='';
 
-  selectedFiles?: FileList;
+  selectedFiles?: any;
 
   hidechooseProfile:boolean=true;
   
@@ -19,10 +22,23 @@ export class UpdateProfilePage implements OnInit {
 
   isSelected: boolean=false;
   url: string | ArrayBuffer;
+  previous_url:any;
   inprogress:boolean=false;
-  constructor() { }
+  constructor(private modalCtrl: ModalController,private apiservice:ApicallsService) { 
+    
+  }
 
   ngOnInit() {
+    this.apiservice.getUserById(this.userid).subscribe((res:any)=>{
+      console.log(this.userid);
+      // console.log(data.data.name);
+      
+      this.username=res.data.name;
+      this.url=res.data.profilepic;
+      this.previous_url=this.url;
+      this.description=res.data.description
+      
+    })
   }
 
 
@@ -31,13 +47,39 @@ export class UpdateProfilePage implements OnInit {
   }
   closechooseProfile(){
     this.hidechooseProfile=true;
-    this.url='';
     this.isSelected=false;
+    this.url=this.previous_url;
+  }
+
+  async back(){
+    const post = await this.modalCtrl.create({
+      component: TabsPage,
+    });
+    await post.present();
+  }
+
+  selectFile(event: any): void {
+    this.selectedFiles = event.target.files[0];
   }
 
   saveProfilePost(){
-    console.log(this.url);
+
+  
+    const formData = new FormData();
+    formData.append('id',this.userid);
+    formData.append('profilepic',this.selectedFiles);
+    
     this.inprogress=true;
+
+    this.apiservice.updateProfilePic(formData).subscribe((data:any)=>{
+      this.inprogress=false;
+      this.hidechooseProfile=true;
+    this.isSelected=false;
+    })
+
+    
+    
+    // console.log(this.userid);
     
   }
   saveProfileData(){
@@ -45,11 +87,20 @@ export class UpdateProfilePage implements OnInit {
     console.log(this.description);
     this.inprogress=true;
 
-    
+   var data= {
+      "name":this.username,
+      "description":this.description,
+      "_id":this.userid
+  }
+ 
+    this.apiservice.updateProfileDetails(data).subscribe((data:any)=>{
+      this.inprogress=false;
+      console.log(data);
+    })
   }
 
   onChange(event: any) {
-
+    this.selectFile(event);
       const file = event.target.files && event.target.files[0];
       if (file) {
         const reader = new FileReader();

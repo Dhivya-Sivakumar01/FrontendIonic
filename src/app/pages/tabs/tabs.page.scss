@@ -9,7 +9,10 @@ ion-tabs {
       ion-tab-button {
           --background:white;
           --color: #92949c;
-          --color-selected: #3171e0 !important;//#C13584;// #222428;
+        //   --color-selected: #3171e0 !important;//#C13584;// #222428;
+        // --color-selected:#007bac;
+        --color-selected: linear-gradient(to bottom,#007bac,#3a89a8);
+
           ion-icon {
               font-size: 1.5rem;
           }
@@ -36,7 +39,10 @@ ion-tabs {
   ion-fab {
       ion-fab-button {
           --background: linear-gradient(to bottom,#fc337d,#fc33af,#dc4fc0,#a353ff,#7b4eb6,#5e21ae);
+        //   --background: linear-gradient(to bottom,#20ab81,#3dbc5c);
+        // --background: linear-gradient(to bottom,#007bac,#3a89a8);
 
+        // --background:#3dbc5c;
           ion-icon {
               font-size: 2.3rem;
           }

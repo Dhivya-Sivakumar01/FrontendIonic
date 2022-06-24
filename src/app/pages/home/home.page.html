@@ -15,8 +15,8 @@
    <ion-row>
     <ion-slides [options]="slideOpts">
       <ion-col>
-      <ion-thumbnail ><!--  routerLink="/tabs/addstory" -->
-        <ion-img  src="assets/imgs/addIcon.png" (click)="addStory()" class="addImage" ></ion-img>
+      <ion-thumbnail >
+        <ion-img  src="assets/imgs/addIcon.png" class="addImage" (click)="addStory()" class="addnewstory"></ion-img>
       </ion-thumbnail>
     </ion-col>
       <ion-slide *ngFor="let item of storiesValue; let i = index">
