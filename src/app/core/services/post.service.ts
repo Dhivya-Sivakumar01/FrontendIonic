@@ -17,4 +17,5 @@ export class PostService {
   getPublicPost(){
     return this.httpclient.get(`${this.baseURL}publicposts`);
   }
+
 }

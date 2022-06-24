@@ -4,6 +4,7 @@ import { PostService } from 'src/app/core/services/post.service';
 import { ModalController } from '@ionic/angular';
 import { CommentServiceService } from 'src/app/core/services/comment-service.service';
 import { TabsPage } from '../tabs/tabs.page';
+import { ApicallsService } from 'src/app/core/services/apicalls.service';
 
 @Component({
   selector: 'app-add-story',
@@ -23,7 +24,7 @@ export class AddStoryPage implements OnInit {
   selectedFiles: any;
   
   inprogress=false;
-  constructor(private postservice: PostService,private modalCtrl: ModalController) { }
+  constructor(private postservice: PostService,private modalCtrl: ModalController,private api:ApicallsService) { }
 
   ngOnInit() {
   }
@@ -114,34 +115,29 @@ export class AddStoryPage implements OnInit {
 
 
     onClickSubmit(data: NgForm) {
-      this.inprogress=true;
+
       this.noImagePost=true;
+        var user:any;
+      this.api.getUserById(this.userid).subscribe((res:any)=>{
+        user=res.data;
+        console.log(user);
+      })
+      console.log(this.selectedFiles);
+      
+      const form = new FormData();
+      form.append('user',user);
+      form.append('storyUrl',this.selectedFiles);
+    
+        this.inprogress=true;
 
-      console.log(this.accessbility);
-
-      const formData = new FormData();
-      formData.append('description',this.comments);
-      formData.append('accessibility',this.accessbility);
-      formData.append('post',this.selectedFiles);
-      formData.append('user','62aeeed26b0657ec29e03f84');
-
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      this.postservice.uploadPost(formData).subscribe(data=>{
-        console.log(data);
-        if(data){
-          this.url='';
+        this.api.addStory(form).subscribe((res:any)=>{
+          console.log(res);
           this.selectedFiles='';
-          this.comments='';
-          this.accessbility='public';
+          this.url='';
           this.isSelected=false;
           this.inprogress=false;
-          const b = document.getElementById('accessbility');
-          b.setAttribute('aria-checked','false');
-          b.classList.remove('toggle-checked');
-          b.classList.add('toggle-unchecked');
+        })
 
-        }
-      });
    }
 
 }

@@ -22,6 +22,7 @@ export class UpdateProfilePage implements OnInit {
 
   isSelected: boolean=false;
   url: string | ArrayBuffer;
+  previous_url:any;
   inprogress:boolean=false;
   constructor(private modalCtrl: ModalController,private apiservice:ApicallsService) { 
     
@@ -34,6 +35,7 @@ export class UpdateProfilePage implements OnInit {
       
       this.username=res.data.name;
       this.url=res.data.profilepic;
+      this.previous_url=this.url;
       this.description=res.data.description
       
     })
@@ -46,6 +48,7 @@ export class UpdateProfilePage implements OnInit {
   closechooseProfile(){
     this.hidechooseProfile=true;
     this.isSelected=false;
+    this.url=this.previous_url;
   }
 
   async back(){
@@ -70,7 +73,8 @@ export class UpdateProfilePage implements OnInit {
 
     this.apiservice.updateProfilePic(formData).subscribe((data:any)=>{
       this.inprogress=false;
-      this.closechooseProfile();
+      this.hidechooseProfile=true;
+    this.isSelected=false;
     })
 
     
@@ -83,15 +87,15 @@ export class UpdateProfilePage implements OnInit {
     console.log(this.description);
     this.inprogress=true;
 
-    const formData = new FormData();
-    formData.append('_id',this.userid);
-    formData.append('name',this.username);
-    formData.append('description',this.description);
-    
-    this.apiservice.updateProfileDetails(formData).subscribe((data:any)=>{
-      this.inprogress=true;
+   var data= {
+      "name":this.username,
+      "description":this.description,
+      "_id":this.userid
+  }
+ 
+    this.apiservice.updateProfileDetails(data).subscribe((data:any)=>{
+      this.inprogress=false;
       console.log(data);
-      
     })
   }
 

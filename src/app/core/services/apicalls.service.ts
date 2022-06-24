@@ -37,4 +37,7 @@ export class ApicallsService {
   updateProfileDetails(data:any):any{
   return this.http.put(`${this.baseURL}updateprofile/`,data);
   }
+  addStory(data:any):any{
+   return this.http.post(`${this.baseURL}addstory/`,data);
+  }
 }
