@@ -18,6 +18,10 @@ export class SinglepostviewPage implements OnInit {
   select: string[]=[];
   comment: any;
   usercomment: string;
+  username: string;
+  id: string;
+  email: string;
+  profilepic: string;
   constructor(private comments: CommentServiceService,private modalCtrl: ModalController) { }
 
   async back(){
@@ -36,6 +40,10 @@ export class SinglepostviewPage implements OnInit {
   }
 
   ngOnInit() {
+    this.username =localStorage.getItem('name');
+    this.id = localStorage.getItem('id');
+    this.email = localStorage.getItem('email');
+    this.profilepic = localStorage.getItem('profilepic');
     console.log(this.postselected);
     this.comments.getComments(this.postselected._id).subscribe((res: any)=>{this.comment=res.data;console.log(res);});
   }
@@ -56,25 +64,16 @@ export class SinglepostviewPage implements OnInit {
     return this.postselected.comments.length;
   }
   addComment(){
-    const userid: any={
-      name: 'Ram',
-      userid: '8648279',
-      emailid: 'random@gmail.com',
-      profilepic: '',
-      description: 'Enjoy the way you are!',
-      followers: [],
-      following: [],
-    };
      const cmt: any={
       // eslint-disable-next-line no-underscore-dangle
       post: this.postselected._id,
-      user: '62aeeed26b0657ec29e03f84',
+      user: this.id,
       comment: this.usercomment,
      };
      const dummyuser: any={
-      id:'62aeeed26b0657ec29e03f84',
-      name:'dhivya',
-      profilepic:'https://zenprospect-production.s3.amazonaws.com/uploads/pictures/620a0fbdc6272000011346ec/picture'
+      id: this.id,
+      name: this.username,
+      profilepic: this.profilepic
      };
      const dummycmt: any={
       // eslint-disable-next-line no-underscore-dangle

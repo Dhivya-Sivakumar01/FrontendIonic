@@ -1,12 +1,22 @@
 <ion-header>
   <ion-toolbar style="background-color: transparent;">
-    <ion-button routerLink="tabs/home" slot="start" (click)="back()" class="homebutton"><!--expand="block" [routerLink]="['/tabs','/tabs/home','/home']" routerDirection="forward"-->
-      <ion-icon expand="full" name="arrow-back"></ion-icon>
-    </ion-button>
-    <ion-title>Comments</ion-title>
-    <ion-button slot="end" routerLink="" class="notification">
-      <ion-icon name=""></ion-icon>
-    </ion-button>
+    <ion-item>
+      <div *ngIf="tab==='home'">
+        <ion-button routerLink="tabs/home" slot="start" (click)="back()" class="homebutton"><!--expand="block" [routerLink]="['/tabs','/tabs/home','/home']" routerDirection="forward"-->
+          <ion-icon expand="full" name="arrow-back"></ion-icon>
+        </ion-button>
+      </div>
+      <div *ngIf="tab!=='home'">
+        <ion-button routerLink="tabs/explore" slot="start" (click)="back()" class="homebutton"><!--expand="block" [routerLink]="['/tabs','/tabs/home','/home']" routerDirection="forward"-->
+          <ion-icon expand="full" name="arrow-back"></ion-icon>
+        </ion-button>
+      </div>
+      <ion-title>Comments</ion-title>
+      <ion-button slot="end" routerLink="" class="notification">
+        <ion-icon name=""></ion-icon>
+      </ion-button>
+    </ion-item>
+
   </ion-toolbar>
 </ion-header>
 

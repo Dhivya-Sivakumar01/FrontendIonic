@@ -8,13 +8,13 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable no-underscore-dangle */
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Comments } from 'src/app/core/interfaces/comments';
 import { CommentServiceService } from 'src/app/core/services/comment-service.service';
 import { PostlistService } from 'src/app/core/services/postlist.service';
 import { Post } from '../../core/interfaces/post';
 import { AddStoryPage } from '../add-story/add-story.page'
-import { PostviewPage } from '../postview/postview.page';
 import { SinglepostviewPage } from '../singlepostview/singlepostview.page';
 import { SinglestoryPage } from '../singlestory/singlestory.page';
 
@@ -44,11 +44,18 @@ export class HomePage implements OnInit {
   buttonValue = 'grid';
   buttonItems: any[] = [];
   storiesValue: any;
+  //local storage variables
+  username:string;
+  id:string;
+  email:string;
 
   constructor(private posts: PostlistService,
      private comments: CommentServiceService,
-     private modalCtrl: ModalController){
+     private modalCtrl: ModalController,
+     router:ActivatedRoute){
      // this.likecount ='2';
+     //this.fetchData();
+
      }
 
   async showPost(post: any){
@@ -59,8 +66,17 @@ export class HomePage implements OnInit {
     });
     await postselected.present();
   }
+  // ngOnChange():void{
+  //   console.log("onchange");
+  //   this.fetchData();
+  // }
   ngOnInit(): void{
-   this.fetchData();
+    this.username =localStorage.getItem('name');
+    this.id = localStorage.getItem('id');
+    this.email = localStorage.getItem('email');
+    this.fetchData();
+
+   console.log("oninit");
    this.stories = [
     { name: 'New' },
     { name: 'Android', src: 'assets/imgs/circles/android.png' },
@@ -88,27 +104,27 @@ export class HomePage implements OnInit {
     {value: 'reels', icon: 'film'},
     {value: 'photos', icon: 'images'},
   ];
-  this.getStories("62aeeed26b0657ec29e03f84").subscribe((data:any)=>{
+  this.getStories(this.id).subscribe((data:any)=>{
     this.storiesValue = data.data;
     this.storiesValue.reverse();
     console.log(typeof data);
     console.log(this.storiesValue);
   })
   }
-  fetchData(){
-    this.posts.generatePosts().subscribe((data: any)=>{this.postlist=data.data;console.log(data.data);});
+  fetchData():any{
+    console.log("Calling fetch......");
+    this.posts.generatePosts(this.id).subscribe((data: any)=>{this.postlist=data.data;console.log(data.data);});
+    return this.postlist;
   }
 
   likeSelect(post: any,num: number){
     console.log('Like selected..'+post._id);
     const data={
       postid:post._id,
-      userid:'62aeeed26b0657ec29e03f84'
+      userid:this.id
     };
-    console.log("before changes.."+typeof(this.select[post._id]));
     if(num===0){
       this.select[post._id]++;
-      console.log("when equals..."+this.select[post._id]);
     }
     else{
       this.select[post._id]--;
@@ -125,12 +141,16 @@ export class HomePage implements OnInit {
     console.log(document.getElementById(name).getAttribute('name'));
     const icon=document.getElementById(name).getAttribute('name');
     let num=0;
+    let index = this.postlist.indexOf(el);
     if(icon==='heart'){
       document.getElementById(name).setAttribute('name','heart-outline');
+      let idIndex = this.postlist[index].likes.indexOf(el);
+      this.postlist[index].likes.splice(idIndex,1);
       num=1;
     }
     else{
       document.getElementById(name).setAttribute('name','heart');
+      this.postlist[index].likes.push(this.id);
       num=0;
     }
     this.likeSelect(el,num);
@@ -159,6 +179,7 @@ export class HomePage implements OnInit {
     }
     this.select[post._id]=post.likes.length;
     console.log("check"+this.select+" "+post.likes.length);
+    localStorage.setItem('select',this.select);
     return this.select[post._id];
   }
 
@@ -202,7 +223,7 @@ export class HomePage implements OnInit {
   async addStory(){
     const addstory = await this.modalCtrl.create({
       component:AddStoryPage,
-      componentProps:{userid:"62aee4e2f6dd4af8ea2fdbbf"}
+      componentProps:{userid:this.id}
     })
     await addstory.present();
 }

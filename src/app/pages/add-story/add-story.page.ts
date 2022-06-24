@@ -29,9 +29,16 @@ export class AddStoryPage implements OnInit {
   comments='';
   selectedFiles: any;
   inprogress=false;
+  //local storage variables
+  username:string;
+  id:string;
+  email:string;
   constructor(private postservice: PostService,private modalCtrl: ModalController,private api:ApicallsService) { }
 
   ngOnInit() {
+    this.username =localStorage.getItem('name');
+    this.id = localStorage.getItem('id');
+    this.email = localStorage.getItem('email');
   }
 
 
@@ -129,7 +136,7 @@ export class AddStoryPage implements OnInit {
       const form = new FormData();
       form.append('user',this.userid);
       form.append('story',this.selectedFiles);
-    
+
         this.inprogress=true;
 
         this.api.addStory(form).subscribe((res:any)=>{

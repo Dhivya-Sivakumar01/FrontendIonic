@@ -16,7 +16,13 @@ export class SinglestoryPage implements OnInit {
 
   constructor(private modalCtrl : ModalController) { }
   @Input() postselected;
+  username: string;
+  id: string;
+  email: string;
   ngOnInit() {
+    this.username =localStorage.getItem('name');
+    this.id = localStorage.getItem('id');
+    this.email = localStorage.getItem('email');
   }
   getBack(){
     this.back()

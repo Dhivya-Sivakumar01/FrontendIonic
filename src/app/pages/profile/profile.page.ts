@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/quotes */
 import { Component, OnInit } from '@angular/core';
 import { AnimationController, ModalController } from '@ionic/angular';
 import { User } from 'src/app/core/interfaces/user';
 import { ApicallsService } from 'src/app/core/services/apicalls.service';
-import { UpdateProfilePage } from '../update-profile/update-profile.page'
+import { UpdateProfilePage } from '../update-profile/update-profile.page';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +19,11 @@ export class ProfilePage implements OnInit {
   posts: any;//[]=[];
   user: any ={};
   images: any[]=[];
+
+  //local storage variables
+  username: string;
+  id: string;
+  email: string;
 
   constructor(private profileapi: ApicallsService,private animationCtrl: AnimationController,private modalCtrl: ModalController) {
     this.stories = [
@@ -43,18 +49,13 @@ export class ProfilePage implements OnInit {
 
 
   ngOnInit() {
-    this.profileapi.getUserDetails().subscribe(data=>{this.user=data.data;console.log(data.data);});
-    this.profileapi.getPost().subscribe(data=>{this.posts=data.data;console.log(data);});
+    this.username =localStorage.getItem('name');
+    this.id = localStorage.getItem('id');
+    this.email = localStorage.getItem('email');
+    this.profileapi.getUserById(this.id).subscribe(data=>{this.user=data.data;console.log(data.data);});
+    this.profileapi.getPost(this.id).subscribe(data=>{this.posts=data.data;console.log(data);});
 
     console.log('without subscribe...'+ this.user);
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    // for(let i=0;i<this.posts.length;i++){
-    //    if(this.isImage(this.posts[i].postUrl)){
-    //     console.log(this.posts[i].imageUrl);
-    //     this.images.push(this.posts[i]);
-    //    }
-    // }
-
   }
   getPostCount(){
     if(this.posts!==undefined){
@@ -164,8 +165,8 @@ export class ProfilePage implements OnInit {
   async editProfile(){
     const addstory = await this.modalCtrl.create({
       component:UpdateProfilePage ,
-      componentProps:{userid:"62aeeed26b0657ec29e03f84"}
-    })
+      componentProps:{userid:this.id}
+    });
     await addstory.present();
 }
 }

@@ -20,9 +20,16 @@ export class AddPostPage implements OnInit {
   comments='';
   selectedFiles: any;
   inprogress=false;
+  //local storage variables
+  username: string;
+  id: string;
+  email: string;
   constructor(private postservice: PostService) { }
 
   ngOnInit() {
+    this.username =localStorage.getItem('name');
+    this.id = localStorage.getItem('id');
+    this.email = localStorage.getItem('email');
   }
 
 
@@ -58,7 +65,7 @@ export class AddPostPage implements OnInit {
       this.isaccess=true;
     }
   }
-  
+
   onChange(event: any) {
 
     this.selectFile(event);
@@ -114,7 +121,7 @@ export class AddPostPage implements OnInit {
       formData.append('description',this.comments);
       formData.append('accessibility',this.accessbility);
       formData.append('post',this.selectedFiles);
-      formData.append('user','62aeeed26b0657ec29e03f84');
+      formData.append('user',this.id);
 
       // eslint-disable-next-line @typescript-eslint/no-shadow
       this.postservice.uploadPost(formData).subscribe(data=>{

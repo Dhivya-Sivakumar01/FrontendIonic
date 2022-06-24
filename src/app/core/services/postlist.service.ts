@@ -12,10 +12,11 @@ enum Visibility{
 })
 
 export class PostlistService {
+  baseURL='http://localhost:5000/api/';
   constructor( private http: HttpClient) {
   }
-  generatePosts(){
+  generatePosts(id: any){
     //console.log('In genertae post..'+this.post.length);
-    return this.http.get('http://localhost:5000/api/home/62aee4e2f6dd4af8ea2fdbbf');
+    return this.http.get(`${this.baseURL}home/${id}`);
   }
 }

@@ -17,6 +17,9 @@ export class SuggestionPage implements OnInit {
   public search: string;
   toggle: boolean;
   suggestion:any;
+  username: string;
+  id: string;
+  email: string;
   constructor(private searchservice: ApicallsService) { }
 
   ngOnInit() {
@@ -25,16 +28,19 @@ export class SuggestionPage implements OnInit {
   //     profilepic: "https://presidio-hack-172022.s3.amazonaws.com/profile_pic/eight.png",
   //     description: "This is a bot user",
   // });
+  this.username =localStorage.getItem('name');
+    this.id = localStorage.getItem('id');
+    this.email = localStorage.getItem('email');
    this.fetchData();
   }
   fetchData(){
-    this.searchservice.getSuggestionUser('62aee4e2f6dd4af8ea2fdbbf').subscribe(res=>{this.suggestion=res.data;console.log(res);});
+    this.searchservice.getSuggestionUser(this.id).subscribe(res=>{this.suggestion=res.data;console.log(res);});
    // console.log(this.users);
   }
   buttonToggle(user:any,tog:number){
     this.toggle = tog===0?false:true;
     if(user!==undefined){
-      if(user.followers.includes('62aee4e2f6dd4af8ea2fdbbf')){
+      if(user.followers.includes(this.id)){
         this.toggle=false; //unfollow active
       }
       else{
@@ -54,7 +60,7 @@ export class SuggestionPage implements OnInit {
   follow(user: any){
     console.log("follow clicked...");
     const follow={
-      userId: "62aee4e2f6dd4af8ea2fdbbf",
+      userId: this.id,
       tofollow: user._id
     };
     this.searchservice.followUser(follow).subscribe(res=>{console.log(res);});
@@ -67,7 +73,7 @@ export class SuggestionPage implements OnInit {
   unfollow(user: any){
     console.log("unfollow clicked..");
     const follow={
-      userId: "62aee4e2f6dd4af8ea2fdbbf",
+      userId: this.id,
       tofollow: user._id
     };
     console.log(follow);
