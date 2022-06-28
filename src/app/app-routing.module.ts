@@ -43,6 +43,11 @@ const routes: Routes = [
     path: 'update-profile',
     loadChildren: () => import('./pages/update-profile/update-profile.module').then( m => m.UpdateProfilePageModule)
   },
+  {
+    path: 'newtoapp',
+    loadChildren: () => import('./pages/newtoapp/newtoapp.module').then( m => m.NewtoappPageModule)
+  },
+
 
 ];
 

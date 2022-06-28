@@ -65,10 +65,10 @@ export class TabsPage implements OnInit {
    // this.selectTab = this.tabs.getSelected();
   }
   routeUrl(){
-    this.route.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    }
-    this.route.onSameUrlNavigation = 'reload'
+    // this.route.routeReuseStrategy.shouldReuseRoute = function() {
+    //   return false;
+    // }
+    // this.route.onSameUrlNavigation = 'reload'
     this.route.navigateByUrl('/tabs/home',{replaceUrl:true});
   }
 

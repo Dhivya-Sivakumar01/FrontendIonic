@@ -26,7 +26,7 @@
       </ion-col>
       <ion-col size="3" class="ion-text-center">
         <ion-label *ngIf="user && user!==undefined && posts!==undefined">
-          <strong>{{posts.posts}}</strong>
+          <strong>{{posts?.length}}</strong>
           <p>
             <ion-text color="medium">Posts</ion-text>
           </p>
@@ -34,7 +34,7 @@
       </ion-col>
       <ion-col size="3" class="ion-text-center">
         <ion-label *ngIf="user && user!==undefined && posts!==undefined">
-          <strong>{{posts.followersLength}}</strong>
+          <strong>{{user.followers?.length}}</strong>
           <p>
             <ion-text color="medium">Followers</ion-text>
           </p>
@@ -42,7 +42,7 @@
       </ion-col>
       <ion-col size="3" class="ion-text-center">
         <ion-label *ngIf="user && user!==undefined && posts!==undefined">
-          <strong>{{posts.followingLength}}</strong>
+          <strong>{{user.following?.length}}</strong>
           <p>
             <ion-text color="medium">Following</ion-text>
           </p>
@@ -62,25 +62,7 @@
         </ion-label>
       </ion-col>
     </ion-row>
-    <!-- <ion-button id="open-modal" expand="block">Settings</ion-button> -->
-    <!-- <ion-row class="marginTop">
-      <ion-col size="4">
-        <ion-button mode="ios" expand="block" size="small" fill="outline" color="medium">
-          <ion-text color="dark">Edit Profile</ion-text>
-        </ion-button>
-      </ion-col>
-      <ion-col size="4">
-        <ion-button mode="ios" expand="block" size="small" fill="outline" color="medium">
-          <ion-text color="dark">Statistics</ion-text>
-        </ion-button>
-      </ion-col>
-      <ion-col size="4">
-        <ion-button mode="ios" expand="block" size="small" fill="outline" color="medium">
-          <ion-text color="dark">Contact</ion-text>
-        </ion-button>
-      </ion-col>
-    </ion-row> -->
-    <ion-row>
+    <!-- <ion-row>
       <ion-slides [options]="slideOpts">
         <ion-slide *ngFor="let item of stories; let i = index">
           <ion-col>
@@ -94,7 +76,7 @@
           </ion-col>
         </ion-slide>
       </ion-slides>
-    </ion-row>
+    </ion-row> -->
     <!-- <ion-row class="images" (ionChange)="buttonsChanged($event)">
       <ion-segment mode="md" [value]="buttonValue">
         <ion-segment-button [value]="item?.value" *ngFor="let item of buttonItems">
@@ -105,7 +87,7 @@
   </ion-grid>
   <div class="container" >
     <div class="grid-container" *ngIf="user!==undefined && posts!==undefined">
-        <span *ngFor="let post of posts.actualdata ; let i = index" [ngClass]="checkFormat(post.postUrl,i+1)" >
+        <span *ngFor="let post of posts ; let i = index" [ngClass]="checkFormat(post.postUrl,i+1)" >
             <div class="post-container"  *ngIf="post.postUrl && isImage(post.postUrl)" >
               <ion-img src={{post.postUrl}}  ></ion-img>
               <div class="blur"></div>

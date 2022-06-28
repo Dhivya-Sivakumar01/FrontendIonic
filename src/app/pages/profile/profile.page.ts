@@ -26,16 +26,6 @@ export class ProfilePage implements OnInit {
   email: string;
 
   constructor(private profileapi: ApicallsService,private animationCtrl: AnimationController,private modalCtrl: ModalController) {
-    this.stories = [
-      { name: 'New' },
-      { name: 'Android', src: 'assets/imgs/circles/android.png' },
-      { name: 'Angular', src: 'assets/imgs/circles/angular.png' },
-      { name: 'Ionic', src: 'assets/imgs/circles/ionic.png' },
-      { name: 'Nodejs', src: 'assets/imgs/circles/nodejs.png' },
-      { name: 'Laravel', src: 'assets/imgs/circles/laravel.png' },
-      { name: 'IOS', src: 'assets/imgs/circles/ios.png' },
-      { name: 'Php', src: 'assets/imgs/circles/php.png' },
-    ];
     this.slideOpts = {
       slidesPerView: this.checkScreen(),
       slideShadows: true
@@ -54,8 +44,17 @@ export class ProfilePage implements OnInit {
     this.email = localStorage.getItem('email');
     this.profileapi.getUserById(this.id).subscribe(data=>{this.user=data.data;console.log(data.data);});
     this.profileapi.getPost(this.id).subscribe(data=>{this.posts=data.data;console.log(data);});
-
-    console.log('without subscribe...'+ this.user);
+    this.stories = [
+      { name: 'New' },
+      { name: 'Android', src: 'assets/imgs/circles/android.png' },
+      { name: 'Angular', src: 'assets/imgs/circles/angular.png' },
+      { name: 'Ionic', src: 'assets/imgs/circles/ionic.png' },
+      { name: 'Nodejs', src: 'assets/imgs/circles/nodejs.png' },
+      { name: 'Laravel', src: 'assets/imgs/circles/laravel.png' },
+      { name: 'IOS', src: 'assets/imgs/circles/ios.png' },
+      { name: 'Php', src: 'assets/imgs/circles/php.png' },
+    ];
+   // console.log('without subscribe...'+ this.user);
   }
   getPostCount(){
     if(this.posts!==undefined){

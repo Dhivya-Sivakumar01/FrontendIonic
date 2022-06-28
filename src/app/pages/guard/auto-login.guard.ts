@@ -17,7 +17,13 @@ export class AutoLoginGuard implements CanActivate {
       this.router.navigateByUrl('/tabs/home',{replaceUrl:true});
       return false;
     }else{
-      return true;
+      if(localStorage.getItem("newToApp")){
+          return true;
+      }else{
+        localStorage.setItem("newToApp","false");
+        this.router.navigateByUrl('/newtoapp',{replaceUrl:true});
+        return false;
+      }
     }
 
   }

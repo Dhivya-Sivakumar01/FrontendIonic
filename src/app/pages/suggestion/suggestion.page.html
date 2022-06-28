@@ -30,11 +30,11 @@
         </ion-content><p style="color:white">{{buttonToggle(user,0)}}</p>
         <div *ngIf="toggle"><!-- true follow-->
           <!-- -- <ion-icon slot="end" class="like" name="add">Follow</ion-icon> -->
-           <ion-button class="follow" (click)="follow(user)">Follow</ion-button>
+           <ion-button class="follow" (click)="follow(user)">Connect</ion-button>
         </div>
         <div *ngIf="!toggle">
           <!-- -- <ion-icon slot="end" class="like" name="search">Follow</ion-icon> -->
-           <ion-button class="following" (click)="unfollow(user)">Unfollow</ion-button>
+           <ion-button class="following" (click)="unfollow(user)">Disconnect</ion-button>
         </div>
     </ion-item>
     </ion-item>
@@ -50,7 +50,7 @@
             </ion-label>
             <p type="hidden" style="color:white;font-size:1px;">{{buttonToggle(suggest,0)}}</p>
             <ion-label>
-              <ion-button class="suggestButton" (click)="follow(suggest)">follow</ion-button>
+              <ion-button class="suggestButton" (click)="follow(suggest)">Connect</ion-button>
             </ion-label>
           </div>
         </div>
